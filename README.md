@@ -40,7 +40,7 @@ Remote commands refer to the value of `supabase/.env.remote`
 export * from "./{{{NAME}}}";
 ```
 
-- {{{NAME}}}.module.scss.template
+- templates/{{{NAME}}}.module.scss.template
 
 ```tsx
 .root {
