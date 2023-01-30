@@ -1,0 +1,24 @@
+import { expect } from "@storybook/jest";
+import { within } from "@storybook/testing-library";
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { {{{NAME}}} } from './{{{NAME}}}';
+
+const meta: ComponentMeta<typeof {{{NAME}}}> = {
+  title: 'Components/{{{PATH}}}{{{NAME}}}',
+  component: {{{NAME}}},
+  parameters: {
+    //  nextRouter: { asPath: '/' },
+  },
+  args: {},
+};
+export default meta;
+
+export const Primary: ComponentStoryObj<typeof {{{NAME}}}> = {
+  args: {},
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(
+      canvas.getByText('Test')
+    ).toBeInTheDocument();
+  },
+}

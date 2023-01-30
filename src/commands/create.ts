@@ -1,5 +1,6 @@
 import path from "path";
 import { Argument, Option, program } from "commander";
+import { getGitHubFileList } from "github-files";
 import { createComponentDir } from "../libs/createComponentDir";
 import { createComponentFile } from "../libs/createComponentFile";
 import { getTemplates } from "../libs/getTemplates";
@@ -18,19 +19,45 @@ const proc = (
   const targetPath = path.resolve(outputPath, ...componentPath);
   createComponentDir(targetPath, componentName);
 
-  //テンプレートからファイルの作成
-  getTemplates(templatePath).forEach((template) =>
-    createComponentFile(
-      componentPath,
-      componentName!,
-      path.resolve(templatePath, `${template}.template`),
-      path.resolve(
-        targetPath,
-        componentName!,
-        template.replace(/{{{NAME}}}/, componentName!)
-      )
-    )
-  );
+  if (/^https:\/\/github.com\//.test(templatePath)) {
+    getGitHubFileList(templatePath).then((files) => {
+      const templates = files?.filter((file) =>
+        /\.template$/.test(file.relativePath)
+      );
+      templates?.forEach(({ url, relativePath }) =>
+        createComponentFile(
+          componentPath,
+          componentName,
+          url,
+          path.resolve(
+            targetPath,
+            componentName,
+            relativePath
+              .replace(/\.template$/, "")
+              .replace(/{{{NAME}}}/, componentName)
+          )
+        )
+      );
+    });
+  } else {
+    //テンプレートからファイルの作成
+    getTemplates(templatePath)
+      .filter((file) => /\.template$/.test(file))
+      .forEach((template) => {
+        createComponentFile(
+          componentPath,
+          componentName,
+          path.resolve(templatePath, template),
+          path.resolve(
+            targetPath,
+            componentName,
+            template
+              .replace(/\.template$/, "")
+              .replace(/{{{NAME}}}/, componentName)
+          )
+        );
+      });
+  }
 };
 
 export const create = program

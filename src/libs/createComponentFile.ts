@@ -1,4 +1,6 @@
 import fs from "fs";
+import path from "path";
+import fetch from "cross-fetch";
 
 export const createComponentFile = async (
   componentPath: string[],
@@ -6,7 +8,13 @@ export const createComponentFile = async (
   src: string,
   dest: string
 ) => {
-  const text = await fs.promises.readFile(src, "utf8");
+  const text = /^https:/.test(src)
+    ? await fetch(src).then((v) => v.text())
+    : await fs.promises.readFile(src, "utf8");
+  const targetDir = path.dirname(dest);
+  await fs.promises
+    .mkdir(targetDir, { recursive: true })
+    .catch(() => undefined);
   fs.promises.writeFile(
     dest,
     text

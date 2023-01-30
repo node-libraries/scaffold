@@ -1,8 +1,13 @@
-# scaffold
+# @node-libraries/scaffold
+
+## install
+
+`npm -g install @node-libraries/scaffold`
 
 ## description
 
-Create a canned file based on a template.
+Create a canned file based on a template.  
+Templates can also be placed on github.
 
 ## usage
 
@@ -15,7 +20,7 @@ Options:
 
 Commands:
   create [options] <name>  Create component
-      -t, --templatePath <templatePath>  TemplatePath (default:./templates)
+      -t, --templatePath <templatePath>  TemplatePath or GitHub-Url(default:./templates)
       -o, --outputPath <outputPath>      OutputPath (default:./src/components)
   help
 ```
@@ -34,7 +39,7 @@ Remote commands refer to the value of `supabase/.env.remote`
 
 <https://github.com/node-libraries/scaffold/tree/master/templates>
 
-- templates/index.tsx.template
+- templates/index.ts.template
 
 ```tsx
 export * from "./{{{NAME}}}";
@@ -50,8 +55,8 @@ export * from "./{{{NAME}}}";
 - templates/{{{NAME}}}.tsx.template
 
 ```tsx
-import React, { FC } from 'react'
-import styled from './{{{NAME}}}.module.scss'
+import React, { FC } from 'react';
+import styled from './{{{NAME}}}.module.scss';
 
 interface Props {}
 
@@ -61,30 +66,37 @@ interface Props {}
  * @param {Props} { }
  */
 export const {{{NAME}}}: FC<Props> = ({}) => {
-  return <div className={styled.root}>Sample</div>
-}
+  return <div className={styled.root}>Test</div>
+};
 ```
 
-- templates/{{{NAME}}}.tsx.template
+- templates/{{{NAME}}}.stories.tsx.template
 
 ```tsx
-import React from 'react'
-import { {{{NAME}}} } from '.'
+import { expect } from "@storybook/jest";
+import { within } from "@storybook/testing-library";
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { {{{NAME}}} } from './{{{NAME}}}';
 
-const StoryInfo = {
+const meta: ComponentMeta<typeof {{{NAME}}}> = {
   title: 'Components/{{{PATH}}}{{{NAME}}}',
-  component: {{{NAME}}}
+  component: {{{NAME}}},
+  parameters: {
+    //  nextRouter: { asPath: '/' },
+  },
+  args: {},
+};
+export default meta;
+
+export const Primary: ComponentStoryObj<typeof {{{NAME}}}> = {
+  args: {},
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(
+      canvas.getByText('Test')
+    ).toBeInTheDocument();
+  },
 }
-export default StoryInfo
-
-export const Primary = (args: Parameters<typeof {{{NAME}}}>[0]) => (
-  <>
-    <{{{NAME}}} {...args}></{{{NAME}}}>
-  </>
-)
-Primary.args = {} as Parameters<typeof {{{NAME}}}>[0]
-
-Primary.parameters = {}
 ```
 
 ## Command Usage
@@ -105,4 +117,10 @@ scaffold create Samples/Sample01
 
 ```sh
 scaffold create -t template -o src/component Samples/Sample01
+```
+
+- GitHub -> src/component/Samples/Sample01
+
+```sh
+scaffold create -t https://github.com/node-libraries/scaffold/tree/master/templates/storybook6 -o src/component Samples/Sample01
 ```
