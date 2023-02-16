@@ -1,6 +1,6 @@
 {
   "name": "@node-libraries/scaffold",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "bin": {
     "scaffold": "dist/index.js"
@@ -17,20 +17,20 @@
   },
   "dependencies": {
     "commander": "^10.0.0",
-    "github-files": "^0.0.6"
+    "github-files": "^0.0.7"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.36",
-    "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.49.0",
-    "@typescript-eslint/parser": "^5.49.0",
-    "eslint": "^8.33.0",
+    "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.3",
+    "prettier": "^2.8.4",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "keywords": [
     "scaffold",
