@@ -5,4 +5,5 @@
 .gitignore
 tsconfig.json
 yarn.lock
-
+test
+templates
