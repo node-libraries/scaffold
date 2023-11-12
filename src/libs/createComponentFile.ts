@@ -1,12 +1,11 @@
 import fs from "fs";
 import path from "path";
-import fetch from "cross-fetch";
 
 export const createComponentFile = async (
   componentPath: string[],
   componentName: string,
   src: string,
-  dest: string
+  dest: string,
 ) => {
   const text = /^https:/.test(src)
     ? await fetch(src).then((v) => v.text())
@@ -21,9 +20,9 @@ export const createComponentFile = async (
       .replace(/{{{NAME}}}/g, componentName)
       .replace(
         /{{{PATH}}}/g,
-        componentPath.length ? componentPath.join("/") + "/" : ""
+        componentPath.length ? componentPath.join("/") + "/" : "",
       ),
-    "utf8"
+    "utf8",
   );
   console.log("output: %s", dest);
 };
