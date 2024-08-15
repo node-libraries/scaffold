@@ -122,5 +122,5 @@ scaffold create -t template -o src/component Samples/Sample01
 - GitHub -> src/component/Samples/Sample01
 
 ```sh
-scaffold create -t https://github.com/node-libraries/scaffold/tree/master/templates/storybook6 -o src/component Samples/Sample01
+scaffold create -t https://github.com/node-libraries/scaffold/tree/master/templates/storybook8 -o src/component Samples/Sample01
 ```
