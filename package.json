@@ -1,6 +1,6 @@
 {
   "name": "@node-libraries/scaffold",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "bin": {
     "scaffold": "dist/index.js"
@@ -16,22 +16,22 @@
     "access": "public"
   },
   "dependencies": {
-    "commander": "^12.1.0",
-    "github-files": "^1.0.2"
+    "commander": "^14.0.2",
+    "github-files": "^1.0.3"
   },
   "devDependencies": {
-    "@types/node": "^22.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.1.0",
-    "@typescript-eslint/parser": "^8.1.0",
-    "eslint": "9.9.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-storybook": "^0.8.0",
-    "prettier": "^3.3.3",
+    "@types/node": "^25.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
+    "@typescript-eslint/parser": "^8.50.0",
+    "eslint": "9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-storybook": "^10.1.10",
+    "prettier": "^3.7.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.1.0"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.50.0"
   },
   "keywords": [
     "scaffold",
